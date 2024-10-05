@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Resumen>
+    <ListadoVentas>
+        <Venta departamento="Guatemala">
+            <Fecha>18/09/2024</Fecha>
+        </Venta>
+        <Venta departamento="Zacapa">
+            <Fecha>17/09/2024</Fecha>
+        </Venta>
+        <Venta departamento="Chimaltenango">
+            <Fecha>17/09/2024</Fecha>
+        </Venta>
+        <Venta departamento="El Progreso">
+            <Fecha>16/09/2024</Fecha>
+        </Venta>
+        <Venta departamento="Izabal">
+            <Fecha>16/09/2024</Fecha>
+        </Venta>
+        <Venta departamento="Guatemala">
+            <Fecha>18/09/2024</Fecha>
+        </Venta>
+        <Venta departamento="Petén">
+            <Fecha>19/09/2024</Fecha>
+        </Venta>
+        <Venta departamento="Chiquimula">
+            <Fecha>15/09/2024</Fecha>
+        </Venta>
+        <Venta departamento="New York">
+            <Fecha>19/09/2024</Fecha> <!-- Este debe ser omitido -->
+        </Venta>
+        <Venta departamento="Santa Rosa">
+            <Fecha>18/09/2024</Fecha>
+        </Venta>
+        <Venta departamento="Quiché">
+            <Fecha>18/09/2024</Fecha>
+        </Venta>
+        <Venta departamento="Escuintla">
+            <Fecha>19/09/2024</Fecha>
+        </Venta>
+        <Venta departamento="Zacapa">
+            <Fecha>17/09/2024</Fecha>
+        </Venta>
+        <Venta departamento="Petén">
+            <Fecha>18/09/2024</Fecha>
+        </Venta>
+        <Venta departamento="Sacatepéquez">
+            <Fecha>19/09/2024</Fecha>
+        </Venta>
+        <Venta departamento="California">
+            <Fecha>15/09/2024</Fecha> <!-- Este debe ser omitido -->
+        </Venta>
+    </ListadoVentas>
+</Resumen>

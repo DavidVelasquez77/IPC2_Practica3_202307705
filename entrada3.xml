@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Resumen>
+    <ListadoVentas>
+        <!-- Departamento válido con ventas -->
+        <Venta departamento="Guatemala">
+            <Fecha>15/09/2024</Fecha>
+        </Venta>
+        <Venta departamento="Guatemala">
+            <Fecha>16/09/2024</Fecha>
+        </Venta>
+        <!-- Departamento válido con ventas -->
+        <Venta departamento="San Marcos">
+            <Fecha>17/09/2024</Fecha>
+        </Venta>
+        <!-- Departamento válido sin ventas (no se incluye en el archivo de salida) -->
+        <Venta departamento="Petén">
+            <Fecha>18/09/2024</Fecha>
+        </Venta>
+        <!-- Departamento válido sin ventas (no se incluye en el archivo de salida) -->
+        <Venta departamento="Quetzaltenango">
+            <Fecha>19/09/2024</Fecha>
+        </Venta>
+        <!-- Departamento no válido -->
+        <Venta departamento="Atlantis">
+            <Fecha>21/09/2024</Fecha>
+        </Venta>
+    </ListadoVentas>
+</Resumen>
