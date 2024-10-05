@@ -1,19 +1,86 @@
 <!-- resultado.html -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resultado de ventas</title>
+    <title>Revisión de Datos Procesados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+
+        pre {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .xml-content {
+            color: #333;
+        }
+
+        .tag {
+            color: #0066cc;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #0052a3;
+        }
+    </style>
 </head>
 <body>
-    <h1>Ventas por departamento</h1>
-    <ul>
-        {% for departamento, ventas in ventas_departamentos.items %}
-            <li>{{ departamento }}: {{ ventas }} ventas</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'cargar_archivo' %}">Cargar otro archivo</a>
+    <h1>Revisión de Datos Procesados</h1>
+
+    <h2>Archivo de salida en formato XML:</h2>
+    <pre class="xml-content">
+        <span class="tag">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+        <span class="tag">&lt;resultados&gt;</span>
+            <span class="tag">&lt;departamentos&gt;</span>
+                {% for venta in lista_ventas %}
+                    <span class="tag">&lt;{{venta.departamento}}&gt;</span>
+                        <span class="tag">&lt;cantidadVentas&gt;</span>{{venta.cantidad_ventas}}<span class="tag">&lt;/cantidadVentas&gt;</span>
+                    <span class="tag">&lt;/{{venta.departamento}}&gt;</span>
+                {% endfor %}
+            <span class="tag">&lt;/departamentos&gt;</span>
+        <span class="tag">&lt;/resultados&gt;</span>
+    </pre>
+
+    <div class="button-container">
+        <a href="{% url 'cargar_archivo' %}" class="button">Cargar otro archivo</a>
+    </div>
 </body>
 </html>
