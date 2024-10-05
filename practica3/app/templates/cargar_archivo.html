@@ -1,21 +1,20 @@
+<!-- cargar_archivo.html -->
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cargar Archivo de Registros</title>
+    <title>Cargar archivo XML</title>
 </head>
 <body>
-    <h1>Cargar Archivo XML de Ventas</h1>
-
+    <h1>Cargar archivo XML de ventas</h1>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Subir Archivo</button>
+        <label for="archivo_xml">Selecciona un archivo XML:</label>
+        <input type="file" name="archivo_xml" accept=".xml" required>
+        <br><br>
+        <button type="submit">Cargar</button>
     </form>
-
-    {% if mensaje %}
-        <p>{{ mensaje }}</p>
-    {% endif %}
 </body>
 </html>

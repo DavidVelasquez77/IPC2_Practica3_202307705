@@ -1,0 +1,19 @@
+<!-- resultado.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado de ventas</title>
+</head>
+<body>
+    <h1>Ventas por departamento</h1>
+    <ul>
+        {% for departamento, ventas in ventas_departamentos.items %}
+            <li>{{ departamento }}: {{ ventas }} ventas</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'cargar_archivo' %}">Cargar otro archivo</a>
+</body>
+</html>

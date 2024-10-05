@@ -1,29 +1,35 @@
+# views.py
+
 from django.shortcuts import render
-from .forms import CargarArchivoForm
+from django.http import HttpResponse
 import xml.etree.ElementTree as ET
 
-# Vista para cargar el archivo XML
 def cargar_archivo(request):
-    mensaje = ""
-    if request.method == "POST":
-        form = CargarArchivoForm(request.POST, request.FILES)
-        if form.is_valid():
-            archivo = request.FILES['archivo']
-            try:
-                # Procesar el archivo XML
-                tree = ET.parse(archivo)
-                root = tree.getroot()
+    if request.method == 'POST' and request.FILES['archivo_xml']:
+        archivo_xml = request.FILES['archivo_xml']
+        
+        # Procesar el archivo XML
+        try:
+            tree = ET.parse(archivo_xml)
+            root = tree.getroot()
+            ventas_departamentos = {}
 
-                # Aquí puedes realizar más operaciones con el XML,
-                # como revisar los departamentos y ventas
-                mensaje = "Archivo cargado y procesado correctamente."
-            except ET.ParseError:
-                mensaje = "Error al procesar el archivo XML."
+            # Recorrer el XML para contar ventas por departamento
+            for venta in root.find('ListadoVentas'):
+                departamento = venta.attrib['departamento']
+                if departamento in ventas_departamentos:
+                    ventas_departamentos[departamento] += 1
+                else:
+                    ventas_departamentos[departamento] = 1
 
-    else:
-        form = CargarArchivoForm()
+            # Renderizar resultados
+            return render(request, 'resultado.html', {'ventas_departamentos': ventas_departamentos})
 
-    return render(request, 'cargar_archivo.html', {'form': form, 'mensaje': mensaje})
+        except ET.ParseError:
+            return HttpResponse('Error al procesar el archivo XML. Asegúrate de que tiene el formato correcto.')
+    
+    return render(request, 'cargar_archivo.html')
+
 
 # Vista de inicio actual
 def index(request):
