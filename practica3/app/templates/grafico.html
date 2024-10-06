@@ -4,40 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gráfico de Ventas por Departamento</title>
-    <!-- Incluir Chart.js desde CDN -->
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <style>
-        .container {
-            width: 80%;
-            margin: 0 auto;
-            text-align: center;
+        #nav-toggle:checked + .mobile-menu {
+            display: block;
+        }
+        #nav-toggle {
+            display: none;
         }
         .chart-container {
             position: relative;
             height: 60vh;
-            width: 80%;
-            margin: 0 auto;
-        }
-        .button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin: 10px;
-            background-color: #0066cc;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
+            width: 100%;
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Gráfico de Ventas por Departamento</h1>
-        <div class="chart-container">
-            <canvas id="myChart"></canvas>
+<body class="bg-gray-100">
+    <!-- Navbar -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between">
+                <div class="flex space-x-7">
+                    <div>
+                        <a href="{% url 'index' %}" class="flex items-center py-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                            <span class="font-semibold text-gray-800 text-lg ml-2">Sistema de Ventas</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="hidden md:flex items-center space-x-3">
+                    <a href="{% url 'index' %}" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Inicio</a>
+                    <a href="{% url 'cargar' %}" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Cargar XML</a>
+                    <a href="{% url 'resultado' %}" class="py-2 px-3 text-gray-700 hover:text-blue-600 transition duration-300">Resultados</a>
+                    <a href="{% url 'grafico' %}" class="py-2 px-3 text-blue-600 font-semibold">Gráficos</a>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <label for="nav-toggle" class="cursor-pointer">
+                        <svg class="w-6 h-6 text-gray-500 hover:text-blue-600" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </label>
+                </div>
+            </div>
         </div>
-        <div>
-            <a href="{% url 'resultado' %}" class="button">Ver XML</a>
-            <a href="{% url 'cargar' %}" class="button">Cargar Nuevo Archivo</a>
+        <input type="checkbox" id="nav-toggle">
+        <div class="hidden mobile-menu md:hidden">
+            <ul class="px-4 py-3 space-y-2">
+                <li><a href="{% url 'index' %}" class="block text-gray-700 hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md">Inicio</a></li>
+                <li><a href="{% url 'cargar' %}" class="block text-gray-700 hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md">Cargar XML</a></li>
+                <li><a href="{% url 'resultado' %}" class="block text-gray-700 hover:bg-blue-600 hover:text-white px-3 py-2 rounded-md">Resultados</a></li>
+                <li><a href="{% url 'grafico' %}" class="block bg-blue-600 text-white px-3 py-2 rounded-md">Gráficos</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="max-w-5xl mx-auto">
+            <h1 class="text-3xl font-bold text-gray-800 mb-8 text-center">Gráfico de Ventas por Departamento</h1>
+            
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <div class="chart-container">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -48,8 +83,8 @@
 
         // Configurar los colores para el gráfico
         const backgroundColors = [
-            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40',
-            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'
+            '#3B82F6', '#EF4444', '#10B981', '#F59E0B', '#6366F1', '#EC4899',
+            '#8B5CF6', '#14B8A6', '#F97316', '#06B6D4', '#84CC16', '#9333EA'
         ];
 
         // Crear el gráfico
@@ -66,13 +101,29 @@
             },
             options: {
                 responsive: true,
+                maintainAspectRatio: false,
                 plugins: {
                     legend: {
                         position: 'right',
+                        labels: {
+                            font: {
+                                family: 'ui-sans-serif, system-ui, sans-serif',
+                                size: 12
+                            }
+                        }
                     },
                     title: {
                         display: true,
-                        text: 'Ventas por Departamento'
+                        text: 'Distribución de Ventas por Departamento',
+                        font: {
+                            family: 'ui-sans-serif, system-ui, sans-serif',
+                            size: 16,
+                            weight: 'bold'
+                        },
+                        padding: {
+                            top: 10,
+                            bottom: 30
+                        }
                     }
                 }
             }
