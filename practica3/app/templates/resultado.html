@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Revisión de Datos Procesados</title>
+    <title>Resultados de Ventas</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -53,8 +53,10 @@
     </style>
 </head>
 <body>
-    <h1>Revisión de Datos Procesados</h1>
-    <h2>Archivo de salida en formato XML:</h2>
+    <h1>Resultados de Ventas por Departamento</h1>
+    
+    <!-- Sección para el XML -->
+    <h2>Datos en formato XML:</h2>
     <pre class="xml-content">
         <span class="tag">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
         <span class="tag">&lt;resultados&gt;</span>
@@ -67,8 +69,10 @@
             <span class="tag">&lt;/departamentos&gt;</span>
         <span class="tag">&lt;/resultados&gt;</span>
     </pre>
-    <div class="button-container">
-        <a href="{% url 'cargar' %}" class="button">Cargar otro archivo</a>
+    
+    <div class="button-container" style="margin-top: 20px; text-align: center;">
+        <a href="{% url 'grafico' %}" style="text-decoration: none; padding: 10px 20px; background-color: #0066cc; color: white; border-radius: 5px;">Ver Gráfico</a>
+        <a href="{% url 'cargar' %}" style="text-decoration: none; padding: 10px 20px; background-color: #0066cc; color: white; border-radius: 5px; margin-left: 10px;">Cargar Nuevo Archivo</a>
     </div>
 </body>
 </html>

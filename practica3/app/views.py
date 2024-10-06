@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 import xml.etree.ElementTree as ET
 from collections import defaultdict
+import json
 
 # Lista de los 22 departamentos válidos de Guatemala
 DEPARTAMENTOS_VALIDOS = [
@@ -56,6 +57,19 @@ def resultado(request):
     lista_ventas = request.session.get('lista_ventas', [])
     return render(request, 'resultado.html', {'lista_ventas': lista_ventas})
 
+def grafico(request):
+    lista_ventas = request.session.get('lista_ventas', [])
+    
+    # Preparar datos para el gráfico
+    departamentos = [venta['departamento'] for venta in lista_ventas]
+    cantidades = [venta['cantidad_ventas'] for venta in lista_ventas]
+    
+    context = {
+        'departamentos': json.dumps(departamentos),
+        'cantidades': json.dumps(cantidades)
+    }
+    
+    return render(request, 'grafico.html', context)
 # Vista de inicio actual
 def index(request):
     return render(request, 'index.html')
