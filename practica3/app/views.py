@@ -70,6 +70,18 @@ def grafico(request):
     }
     
     return render(request, 'grafico.html', context)
-# Vista de inicio actual
+
+def ayuda(request):
+    
+    estudiante = {
+        'nombre': 'Josué David Velasquez Ixchop', 
+        'carnet': '202307705',
+        'curso': 'Introducción a la Programación y Computacion 2',
+        'seccion': 'A',
+    }
+    
+    return render(request, 'ayuda.html', {'estudiante': estudiante})
+
+
 def index(request):
     return render(request, 'index.html')

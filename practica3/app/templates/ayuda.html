@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datos del Estudiante</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .bg-gradient-animate {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #6366f1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 150% 150%;
+            animation: gradient 6s ease infinite;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        .card-glow {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-glow::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .card-glow:hover::before {
+            opacity: 1;
+        }
+
+        #nav-toggle:checked + .mobile-menu {
+            display: block;
+        }
+
+        #nav-toggle {
+            display: none;
+        }
+    </style>
+</head>
+<body class="bg-gradient-animate min-h-screen">
+    <!-- Navbar Mejorado -->
+    <nav class="glass-effect fixed w-full top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="{% url 'index' %}" class="flex items-center space-x-3 group">
+                        <div class="relative float">
+                            <div class="absolute inset-0 bg-blue-100 rounded-full opacity-50 group-hover:scale-110 transition-transform duration-300"></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 relative z-10 transform group-hover:rotate-12 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <span class="font-bold text-xl gradient-text">Sistema de Ventas</span>
+                    </a>
+                </div>
+
+                <!-- Nav Links Mejorados -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="{% url 'index' %}" class="nav-link py-2 px-4 text-white hover:text-blue-200 transition-all duration-300 font-medium">Inicio</a>
+                    <a href="{% url 'cargar' %}" class="nav-link py-2 px-4 text-white hover:text-blue-200 transition-all duration-300 font-medium">Cargar XML</a>
+                    <a href="{% url 'resultado' %}" class="nav-link py-2 px-4 text-white hover:text-blue-200 transition-all duration-300 font-medium">Resultados</a>
+                    <a href="{% url 'grafico' %}" class="nav-link py-2 px-4 text-white hover:text-blue-200 transition-all duration-300 font-medium">Gráficos</a>
+                    <a href="{% url 'ayuda' %}" class="nav-link py-2 px-4 text-white hover:text-blue-200 transition-all duration-300 font-medium">Ayuda</a>
+                </div>
+
+                <div class="md:hidden flex items-center">
+                    <label for="nav-toggle" class="cursor-pointer p-2 rounded-full hover:bg-white/10 transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <input type="checkbox" id="nav-toggle">
+        
+        <div class="hidden mobile-menu md:hidden border-t border-white/10">
+            <div class="px-2 pt-2 pb-3 space-y-1 glass-effect">
+                <a href="{% url 'index' %}" class="block px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-all duration-300">Inicio</a>
+                <a href="{% url 'cargar' %}" class="block px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-all duration-300">Cargar XML</a>
+                <a href="{% url 'resultado' %}" class="block px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-all duration-300">Resultados</a>
+                <a href="{% url 'grafico' %}" class="block px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-all duration-300">Gráficos</a>
+                <a href="{% url 'ayuda' %}" class="block px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-all duration-300">Ayuda</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido Principal Mejorado -->
+    <div class="container mx-auto px-4 py-24">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-5xl font-bold text-white mb-8 text-center">
+                <span class="relative">
+                    <span class="absolute -inset-1 rounded-lg bg-white/20 blur-xl"></span>
+                    <span class="relative">Datos del Estudiante</span>
+                </span>
+            </h1>
+
+            <div class="glass-effect rounded-2xl shadow-2xl p-8 card-glow">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="space-y-6">
+                        <div class="relative group">
+                            <div class="absolute -inset-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000"></div>
+                            <div class="relative glass-effect rounded-lg p-4">
+                                <h2 class="text-lg font-semibold text-white">Nombre</h2>
+                                <p class="text-xl font-bold text-white">{{ estudiante.nombre }}</p>
+                            </div>
+                        </div>
+                        
+                        <div class="relative group">
+                            <div class="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000"></div>
+                            <div class="relative glass-effect rounded-lg p-4">
+                                <h2 class="text-lg font-semibold text-white">Carnet</h2>
+                                <p class="text-xl font-bold text-white">{{ estudiante.carnet }}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="relative group">
+                            <div class="absolute -inset-0.5 bg-gradient-to-r from-pink-500 to-red-500 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000"></div>
+                            <div class="relative glass-effect rounded-lg p-4">
+                                <h2 class="text-lg font-semibold text-white">Curso</h2>
+                                <p class="text-xl font-bold text-white">{{ estudiante.curso }}</p>
+                            </div>
+                        </div>
+
+                        <div class="relative group">
+                            <div class="absolute -inset-0.5 bg-gradient-to-r from-red-500 to-yellow-500 rounded-lg blur opacity-30 group-hover:opacity-100 transition duration-1000"></div>
+                            <div class="relative glass-effect rounded-lg p-4">
+                                <h2 class="text-lg font-semibold text-white">Sección</h2>
+                                <p class="text-xl font-bold text-white">{{ estudiante.seccion }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
