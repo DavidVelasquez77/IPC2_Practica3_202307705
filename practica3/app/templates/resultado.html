@@ -1,5 +1,3 @@
-<!-- resultado.html -->
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -14,17 +12,14 @@
             padding: 20px;
             background-color: #f5f5f5;
         }
-
         h1, h2 {
             color: #333;
         }
-
         h1 {
             text-align: center;
             border-bottom: 2px solid #333;
             padding-bottom: 10px;
         }
-
         pre {
             background-color: white;
             padding: 20px;
@@ -33,20 +28,16 @@
             overflow-x: auto;
             font-family: 'Courier New', Courier, monospace;
         }
-
         .xml-content {
             color: #333;
         }
-
         .tag {
             color: #0066cc;
         }
-
         .button-container {
             text-align: center;
             margin-top: 30px;
         }
-
         .button {
             display: inline-block;
             padding: 10px 20px;
@@ -56,7 +47,6 @@
             border-radius: 5px;
             transition: background-color 0.3s;
         }
-
         .button:hover {
             background-color: #0052a3;
         }
@@ -64,7 +54,6 @@
 </head>
 <body>
     <h1>Revisión de Datos Procesados</h1>
-
     <h2>Archivo de salida en formato XML:</h2>
     <pre class="xml-content">
         <span class="tag">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
@@ -78,9 +67,8 @@
             <span class="tag">&lt;/departamentos&gt;</span>
         <span class="tag">&lt;/resultados&gt;</span>
     </pre>
-
     <div class="button-container">
-        <a href="{% url 'cargar_archivo' %}" class="button">Cargar otro archivo</a>
+        <a href="{% url 'cargar' %}" class="button">Cargar otro archivo</a>
     </div>
 </body>
 </html>

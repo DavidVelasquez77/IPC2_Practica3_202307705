@@ -3,53 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Ventas</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <title>Inicio</title>
 </head>
-<body class="bg-gray-100">
-    <nav class="bg-blue-600 text-white p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-2xl font-bold">SistemaVentas</h1>
-            <div class="space-x-4">
-                <a href="#" class="hover:text-blue-200">Inicio</a>
-                <a href="#" class="hover:text-blue-200">Acerca de</a>
-                <a href="#" class="hover:text-blue-200">Contacto</a>
-            </div>
-        </div>
-    </nav>
-
-    <main class="container mx-auto mt-8 px-4">
-        <div class="bg-white rounded-lg shadow-lg p-6 md:p-8">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">Bienvenido a la aplicación de ventas</h2>
-            <p class="text-gray-600 mb-6">Gestiona tus ventas de manera eficiente y sencilla.</p>
-            
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="bg-blue-50 p-6 rounded-lg">
-                    <i class="fas fa-file-upload text-4xl text-blue-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">Cargar archivo de ventas</h3>
-                    <p class="text-gray-600 mb-4">Sube tu archivo de ventas para comenzar a procesar los datos.</p>
-                    <a href="{% url 'cargar_archivo' %}" class="inline-block bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition duration-300">
-                        Cargar archivo
-                    </a>
-                </div>
-                
-                <div class="bg-green-50 p-6 rounded-lg">
-                    <i class="fas fa-chart-line text-4xl text-green-500 mb-4"></i>
-                    <h3 class="text-xl font-semibold mb-2">Ver estadísticas</h3>
-                    <p class="text-gray-600 mb-4">Analiza el rendimiento de tus ventas con gráficos detallados.</p>
-                    <button class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition duration-300">
-                        Ver estadísticas
-                    </button>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <footer class="bg-gray-800 text-white mt-12 py-6">
-        <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2024 Sistema de Ventas. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+<body>
+    <h1>Bienvenido a la Aplicación de Ventas</h1>
+    <a href="{% url 'cargar' %}">Cargar Archivo XML</a>  <!-- Enlace a la vista 'cargar' -->
 </body>
 </html>

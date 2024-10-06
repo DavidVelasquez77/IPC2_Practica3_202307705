@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cargar Archivo XML</title>
+</head>
+<body>
+    <h1>Cargar Archivo XML de Ventas</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="archivo_xml">Seleccione un archivo XML:</label>
+        <input type="file" name="archivo_xml" required><br><br>
+        <input type="submit" value="Cargar">
+    </form>
+</body>
+</html>
