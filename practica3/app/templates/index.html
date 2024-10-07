@@ -6,7 +6,95 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Ventas</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    
     <style>
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .bg-gradient-animate {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #6366f1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 150% 150%;
+            animation: gradient 6s ease infinite;
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 50%;
+            background: linear-gradient(to right, #3b82f6, #8b5cf6);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        .card-glow {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-glow::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+            opacity: 0;
+        }
+
+        .card-glow:hover::before {
+            opacity: 1;
+        }
+
+        #nav-toggle:checked + .mobile-menu {
+            display: block;
+        }
+
+        #nav-toggle {
+            display: none;
+        }
         #nav-toggle:checked + .mobile-menu {
             display: block;
         }
@@ -45,31 +133,33 @@
 
 <body class="bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen font-sans">
     <!-- Navbar con efecto de vidrio mejorado -->
-    <nav class="bg-white/70 backdrop-blur-lg shadow-lg fixed w-full top-0 z-50 border-b border-white/20">
+    <nav class="glass-effect fixed w-full top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <a href="{% url 'index' %}" class="flex items-center space-x-3 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                        </svg>
-                        <span class="font-bold text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Sistema de Ventas</span>
+                        <div class="relative float">
+                            <div class="absolute inset-0 bg-blue-100 rounded-full opacity-50 group-hover:scale-110 transition-transform duration-300"></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 relative z-10 transform group-hover:rotate-12 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <span class="font-bold text-xl gradient-text">Sistema de Ventas</span>
                     </a>
                 </div>
 
-                <!-- Nav Links - Desktop -->
+                <!-- Nav Links Mejorados -->
                 <div class="hidden md:flex items-center space-x-1">
-                    <a href="{% url 'index' %}" class="py-2 px-4 text-gray-700 hover:text-blue-600 rounded-full hover:bg-blue-50 transition-all duration-300 font-medium">Inicio</a>
-                    <a href="{% url 'cargar' %}" class="py-2 px-4 text-gray-700 hover:text-blue-600 rounded-full hover:bg-blue-50 transition-all duration-300 font-medium">Cargar XML</a>
-                    <a href="{% url 'resultado' %}" class="py-2 px-4 text-gray-700 hover:text-blue-600 rounded-full hover:bg-blue-50 transition-all duration-300 font-medium">Resultados</a>
-                    <a href="{% url 'grafico' %}" class="py-2 px-4 text-gray-700 hover:text-blue-600 rounded-full hover:bg-blue-50 transition-all duration-300 font-medium">Gráficos</a>
-                    <a href="{% url 'ayuda' %}" class="py-2 px-4 text-gray-700 hover:text-blue-600 rounded-full hover:bg-blue-50 transition-all duration-300 font-medium">Ayuda</a>
+                    <a href="{% url 'index' %}" class="nav-link py-2 px-4 text-white hover:text-blue-200 transition-all duration-300 font-medium">Inicio</a>
+                    <a href="{% url 'cargar' %}" class="nav-link py-2 px-4 text-white hover:text-blue-200 transition-all duration-300 font-medium">Cargar XML</a>
+                    <a href="{% url 'resultado' %}" class="nav-link py-2 px-4 text-white hover:text-blue-200 transition-all duration-300 font-medium">Resultados</a>
+                    <a href="{% url 'grafico' %}" class="nav-link py-2 px-4 text-white hover:text-blue-200 transition-all duration-300 font-medium">Gráficos</a>
+                    <a href="{% url 'ayuda' %}" class="nav-link py-2 px-4 text-white hover:text-blue-200 transition-all duration-300 font-medium">Ayuda</a>
                 </div>
 
-                <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
-                    <label for="nav-toggle" class="cursor-pointer p-2 rounded-full hover:bg-gray-100">
-                        <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <label for="nav-toggle" class="cursor-pointer p-2 rounded-full hover:bg-white/10 transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </label>
@@ -77,17 +167,15 @@
             </div>
         </div>
 
-        <!-- Mobile Menu Toggle -->
         <input type="checkbox" id="nav-toggle">
-
-        <!-- Mobile Menu -->
-        <div class="hidden mobile-menu md:hidden border-t border-gray-100">
-            <div class="px-2 pt-2 pb-3 space-y-1 bg-white/70 backdrop-blur-lg">
-                <a href="{% url 'index' %}" class="block px-4 py-2 rounded-full text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300">Inicio</a>
-                <a href="{% url 'cargar' %}" class="block px-4 py-2 rounded-full text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300">Cargar XML</a>
-                <a href="{% url 'resultado' %}" class="block px-4 py-2 rounded-full text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300">Resultados</a>
-                <a href="{% url 'grafico' %}" class="block px-4 py-2 rounded-full text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300">Gráficos</a>
-                <a href="{% url 'ayuda' %}" class="block px-4 py-2 rounded-full text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300">Ayuda</a>
+        
+        <div class="hidden mobile-menu md:hidden border-t border-white/10">
+            <div class="px-2 pt-2 pb-3 space-y-1 glass-effect">
+                <a href="{% url 'index' %}" class="block px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-all duration-300">Inicio</a>
+                <a href="{% url 'cargar' %}" class="block px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-all duration-300">Cargar XML</a>
+                <a href="{% url 'resultado' %}" class="block px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-all duration-300">Resultados</a>
+                <a href="{% url 'grafico' %}" class="block px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-all duration-300">Gráficos</a>
+                <a href="{% url 'ayuda' %}" class="block px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-all duration-300">Ayuda</a>
             </div>
         </div>
     </nav>

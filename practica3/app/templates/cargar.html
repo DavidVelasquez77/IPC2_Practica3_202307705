@@ -6,24 +6,43 @@
     <title>Cargar Archivo XML</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <style>
-        /* Animación para iconos */
+        /* Cambios de color de fondo */
+        @keyframes backgroundAnimation {
+            0% { background-color: #FF5733; }  /* Rojo */
+            25% { background-color: #FFBD33; } /* Amarillo */
+            50% { background-color: #75FF33; } /* Verde */
+            75% { background-color: #33FFBD; } /* Turquesa */
+            100% { background-color: #3375FF; } /* Azul */
+        }
+
+        /* Animación para el navbar */
+        .navbar {
+            transition: background-color 0.5s ease;
+        }
+
+        /* Efecto de pulsación en el botón */
         @keyframes pulse {
             0%, 100% {
                 transform: scale(1);
             }
             50% {
-                transform: scale(1.1);
+                transform: scale(1.05);
             }
         }
 
-        /* Transición suave para los botones */
-        .transition-all {
-            transition: all 0.3s ease-in-out;
+        /* Estilos del botón */
+        .custom-button {
+            @apply px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl focus:outline-none transition-all duration-300;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            background-color: #1D4ED8; /* Color de fondo no transparente */
         }
 
-        .transition-all:hover {
-            transform: translateY(-3px);
+        .custom-button:hover {
+            animation: pulse 0.6s ease-in-out infinite;
+            background-color: #1E40AF; /* Color más oscuro al pasar el ratón */
         }
 
         /* Mejorar la apariencia del input de archivo */
@@ -52,40 +71,159 @@
         .file-box:hover {
             border-color: #3b82f6;
         }
+
+        body {
+            animation: backgroundAnimation 10s infinite alternate;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.2); /* Cambiado para un efecto más opaco */
+            backdrop-filter: blur(10px);
+            border-radius: 1rem;
+        }
+        
         #nav-toggle {
             display: none;
         }
+                .custom-button {
+                    background-color: #3375FF; 
+                    border: none;
+                    color: white;
+                    padding: 15px 32px;
+                    text-align: center;
+                    text-decoration: none;
+                    display: inline-block;
+                    font-size: 16px;
+                    margin: 4px 2px;
+                    cursor: pointer;
+                    border-radius: 12px;
+                    transition: background-color 0.3s ease;
+                }
+                
+                .custom-button:hover {
+                    background-color: #2554C7; 
+                }
+                
+                .custom-button i {
+                    margin-right: 8px;
+                }
+                @keyframes gradient {
+                    0% { background-position: 0% 50%; }
+                    50% { background-position: 100% 50%; }
+                    100% { background-position: 0% 50%; }
+                }
         
-
+                .bg-gradient-animate {
+                    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+                    background-size: 400% 400%;
+                    animation: gradient 15s ease infinite;
+                }
+        
+                .glass-effect {
+                    background: rgba(255, 255, 255, 0.1);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.3);
+                }
+        
+                @keyframes float {
+                    0% { transform: translateY(0px); }
+                    50% { transform: translateY(-10px); }
+                    100% { transform: translateY(0px); }
+                }
+        
+                .float {
+                    animation: float 6s ease-in-out infinite;
+                }
+        
+                .gradient-text {
+                    background: linear-gradient(45deg, #3b82f6, #8b5cf6, #6366f1);
+                    -webkit-background-clip: text;
+                    background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-size: 150% 150%;
+                    animation: gradient 6s ease infinite;
+                }
+        
+                .nav-link {
+                    position: relative;
+                }
+        
+                .nav-link::after {
+                    content: '';
+                    position: absolute;
+                    width: 0;
+                    height: 2px;
+                    bottom: 0;
+                    left: 50%;
+                    background: linear-gradient(to right, #3b82f6, #8b5cf6);
+                    transition: all 0.3s ease;
+                    transform: translateX(-50%);
+                }
+        
+                .nav-link:hover::after {
+                    width: 80%;
+                }
+        
+                .card-glow {
+                    position: relative;
+                    overflow: hidden;
+                }
+        
+                .card-glow::before {
+                    content: '';
+                    position: absolute;
+                    top: -50%;
+                    left: -50%;
+                    width: 200%;
+                    height: 200%;
+                    background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 70%);
+                    transform: rotate(45deg);
+                    transition: all 0.3s ease;
+                    opacity: 0;
+                }
+        
+                .card-glow:hover::before {
+                    opacity: 1;
+                }
+        
+                #nav-toggle:checked + .mobile-menu {
+                    display: block;
+                }
+        
+                #nav-toggle {
+                    display: none;
+                }
     </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col justify-between">
+<body class="min-h-screen flex flex-col justify-between">
     <!-- Navbar -->
-    <nav class="bg-white/70 backdrop-blur-lg shadow-lg fixed w-full top-0 z-50 border-b border-white/20">
+    <nav class="glass-effect fixed w-full top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
                     <a href="{% url 'index' %}" class="flex items-center space-x-3 group">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 group-hover:text-blue-700 transition-colors duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                        </svg>
-                        <span class="font-bold text-xl bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Sistema de Ventas</span>
+                        <div class="relative float">
+                            <div class="absolute inset-0 bg-blue-100 rounded-full opacity-50 group-hover:scale-110 transition-transform duration-300"></div>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600 relative z-10 transform group-hover:rotate-12 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <span class="font-bold text-xl gradient-text">Sistema de Ventas</span>
                     </a>
                 </div>
 
-                <!-- Nav Links - Desktop -->
+                <!-- Nav Links Mejorados -->
                 <div class="hidden md:flex items-center space-x-1">
-                    <a href="{% url 'index' %}" class="py-2 px-4 text-gray-700 hover:text-blue-600 rounded-full hover:bg-blue-50 transition-all duration-300 font-medium">Inicio</a>
-                    <a href="{% url 'cargar' %}" class="py-2 px-4 text-gray-700 hover:text-blue-600 rounded-full hover:bg-blue-50 transition-all duration-300 font-medium">Cargar XML</a>
-                    <a href="{% url 'resultado' %}" class="py-2 px-4 text-gray-700 hover:text-blue-600 rounded-full hover:bg-blue-50 transition-all duration-300 font-medium">Resultados</a>
-                    <a href="{% url 'grafico' %}" class="py-2 px-4 text-gray-700 hover:text-blue-600 rounded-full hover:bg-blue-50 transition-all duration-300 font-medium">Gráficos</a>
-                    <a href="{% url 'ayuda' %}" class="py-2 px-4 text-gray-700 hover:text-blue-600 rounded-full hover:bg-blue-50 transition-all duration-300 font-medium">Ayuda</a>
+                    <a href="{% url 'index' %}" class="nav-link py-2 px-4 text-white hover:text-blue-200 transition-all duration-300 font-medium">Inicio</a>
+                    <a href="{% url 'cargar' %}" class="nav-link py-2 px-4 text-white hover:text-blue-200 transition-all duration-300 font-medium">Cargar XML</a>
+                    <a href="{% url 'resultado' %}" class="nav-link py-2 px-4 text-white hover:text-blue-200 transition-all duration-300 font-medium">Resultados</a>
+                    <a href="{% url 'grafico' %}" class="nav-link py-2 px-4 text-white hover:text-blue-200 transition-all duration-300 font-medium">Gráficos</a>
+                    <a href="{% url 'ayuda' %}" class="nav-link py-2 px-4 text-white hover:text-blue-200 transition-all duration-300 font-medium">Ayuda</a>
                 </div>
 
-                <!-- Mobile menu button -->
                 <div class="md:hidden flex items-center">
-                    <label for="nav-toggle" class="cursor-pointer p-2 rounded-full hover:bg-gray-100">
-                        <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <label for="nav-toggle" class="cursor-pointer p-2 rounded-full hover:bg-white/10 transition-colors duration-300">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </label>
@@ -93,26 +231,22 @@
             </div>
         </div>
 
-        <!-- Mobile Menu Toggle -->
         <input type="checkbox" id="nav-toggle">
-
-        <!-- Mobile Menu -->
-        <div class="hidden mobile-menu md:hidden border-t border-gray-100">
-            <div class="px-2 pt-2 pb-3 space-y-1 bg-white/70 backdrop-blur-lg">
-                <a href="{% url 'index' %}" class="block px-4 py-2 rounded-full text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300">Inicio</a>
-                <a href="{% url 'cargar' %}" class="block px-4 py-2 rounded-full text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300">Cargar XML</a>
-                <a href="{% url 'resultado' %}" class="block px-4 py-2 rounded-full text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300">Resultados</a>
-                <a href="{% url 'grafico' %}" class="block px-4 py-2 rounded-full text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300">Gráficos</a>
-                <a href="{% url 'ayuda' %}" class="block px-4 py-2 rounded-full text-gray-700 hover:text-blue-600 hover:bg-blue-50 transition-all duration-300">Ayuda</a>
+        
+        <div class="hidden mobile-menu md:hidden border-t border-white/10">
+            <div class="px-2 pt-2 pb-3 space-y-1 glass-effect">
+                <a href="{% url 'index' %}" class="block px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-all duration-300">Inicio</a>
+                <a href="{% url 'cargar' %}" class="block px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-all duration-300">Cargar XML</a>
+                <a href="{% url 'resultado' %}" class="block px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-all duration-300">Resultados</a>
+                <a href="{% url 'grafico' %}" class="block px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-all duration-300">Gráficos</a>
+                <a href="{% url 'ayuda' %}" class="block px-4 py-2 text-white hover:bg-white/10 rounded-lg transition-all duration-300">Ayuda</a>
             </div>
         </div>
     </nav>
 
-
-
     <!-- Contenido principal -->
     <div class="container mx-auto px-4 py-16 mt-8">
-        <div class="max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
+        <div class="max-w-md mx-auto glass-effect shadow-lg p-6">
             <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Cargar Archivo XML de Ventas</h1>
 
             <form method="post" enctype="multipart/form-data" class="space-y-6">
@@ -121,7 +255,7 @@
                 <div class="file-input-wrapper w-full">
                     <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center cursor-pointer hover:border-blue-500 transition-colors file-box">
                         <svg class="mx-auto h-12 w-12 text-gray-400 animate-pulse" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                            <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M28 8H12a4 4 0 00-4 4v28a4 4 0 004 4h16a4 4 0 004-4V12a4 4 0 00-4-4zM16 24l4-4m0 0l4 4m-4-4v16" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                         <div class="mt-4">
                             <label for="archivo_xml" class="text-sm font-medium text-gray-700">
@@ -134,8 +268,8 @@
                 </div>
                 
                 <div class="flex justify-center mt-6">
-                    <button type="submit" class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all">
-                        Cargar Archivo
+                    <button type="submit" id="uploadButton" name="uploadButton" class="custom-button">
+                        <i class="fas fa-upload"></i> Cargar Archivo
                     </button>
                 </div>
             </form>
