@@ -95,25 +95,84 @@
         #nav-toggle {
             display: none;
         }
-        #nav-toggle:checked + .mobile-menu {
-            display: block;
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        #nav-toggle {
-            display: none;
+        .bg-gradient-animate {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
 
         @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .gradient-text {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #6366f1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 150% 150%;
+            animation: gradient 6s ease infinite;
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 2s ease-in-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .rotate {
+            animation: rotate 10s infinite linear;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
             0% {
-                transform: translateY(0px);
+                transform: scale(1);
             }
-
             50% {
-                transform: translateY(-10px);
+                transform: scale(1.1);
             }
-
             100% {
-                transform: translateY(0px);
+                transform: scale(1);
             }
         }
 
@@ -128,11 +187,36 @@
         .transition-shadow:hover {
             box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
         }
+        #nav-toggle {
+            display: none;
+        }
+            @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-15px); } /* Desplazamiento mayor */
+        100% { transform: translateY(0px); }
+    }
+
+    .float-animation {
+        animation: float 4s ease-in-out infinite; /* Tiempo más corto */
+    }
+
+    .transition-shadow {
+        transition: box-shadow 0.3s ease-in-out;
+    }
+
+    .transition-shadow:hover {
+        box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Rotación de los íconos al flotar */
+    .rotate-hover:hover {
+        transform: rotate(10deg);
+    }
     </style>
 </head>
 
-<body class="bg-gradient-to-br from-blue-50 via-white to-purple-50 min-h-screen font-sans">
-    <!-- Navbar con efecto de vidrio mejorado -->
+<body class="bg-gradient-animate min-h-screen font-sans">
+    <!-- Navbar -->
     <nav class="glass-effect fixed w-full top-0 z-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
@@ -186,11 +270,11 @@
         <div class="bg-gradient-to-b from-white/50 to-transparent backdrop-blur-sm">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
                 <div class="text-center space-y-8">
-                    <h1 class="text-5xl sm:text-6xl font-extrabold">
+                    <h1 class="text-5xl sm:text-6xl font-extrabold fade-in-up">
                         <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Sistema de Análisis de Ventas</span>
                     </h1>
-                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">Transforme sus datos en decisiones inteligentes con nuestro sistema de análisis avanzado.</p>
-                    <div class="flex justify-center space-x-4">
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto fade-in-up">Transforme sus datos en decisiones inteligentes con nuestro sistema de análisis avanzado.</p>
+                    <div class="flex justify-center space-x-4 fade-in-up">
                         <a href="{% url 'cargar' %}" class="inline-flex items-center px-8 py-4 rounded-full text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">Comenzar Ahora</a>
                         <a href="{% url 'resultado' %}" class="inline-flex items-center px-8 py-4 rounded-full text-gray-700 bg-white hover:bg-gray-50 transition-all duration-300 font-medium shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 border border-gray-200">Ver Resultados</a>
                     </div>
@@ -198,12 +282,12 @@
             </div>
         </div>
 
-        <!-- Features Section -->
+        <!-- Features Section con animaciones adicionales -->
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Feature 1 -->
-                <div class="group bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 transition-shadow">
-                    <div class="text-blue-600 mb-6 float-animation">
+                <div class="group bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 transition-shadow fade-in-up">
+                    <div class="text-blue-600 mb-6 rotate">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                         </svg>
@@ -213,8 +297,8 @@
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="group bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 transition-shadow">
-                    <div class="text-blue-600 mb-6 float-animation">
+                <div class="group bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 transition-shadow fade-in-up pulse">
+                    <div class="text-blue-600 mb-6">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4a2 2 0 002 2h10a2 2 0 002-2V3M5 7v14a2 2 0 002 2h10a2 2 0 002-2V7M10 12h4" />
                         </svg>
@@ -224,7 +308,7 @@
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="group bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 transition-shadow">
+                <div class="group bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-100 transition-shadow fade-in-up">
                     <div class="text-blue-600 mb-6 float-animation">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h11M9 6h11m-8 8h8m-5 4h5" />
@@ -236,6 +320,11 @@
             </div>
         </div>
     </main>
+
+    <!-- Footer -->
+    <footer class="bg-white/50 py-6 mt-16 text-center">
+        <p class="text-gray-600">© 2024 Sistema de Ventas. Todos los derechos reservados.</p>
+    </footer>
 </body>
 
 </html>
