@@ -1,7 +1,9 @@
+# backend/models.py (Flask)
+
 class VentasDepartamento:
     def __init__(self, departamento, cantidad_ventas):
         self.departamento = departamento
-        self.cantidad_ventas = cantidad_ventas  # Asegúrate de que este nombre es correcto
+        self.cantidad_ventas = cantidad_ventas
   
     def to_xml(self):
         # Genera el XML para cada departamento con ventas
